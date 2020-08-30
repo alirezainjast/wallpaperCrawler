@@ -1,5 +1,6 @@
 const fs = require('fs');
 const download = require('download');
+const { count } = require('console');
 
 class Downloader {
     constructor(){
@@ -10,15 +11,25 @@ class Downloader {
         this.lastId++;
     }
 
-    readLastData(callback){
-        fs.readFile('./data/meta.json', (err, file)=>{
-            if(err) throw err;
-            let tmpLastId = '';
-            tmpLastId = file;
-            tmpLastId = JSON.parse(tmpLastId);
-            this.lastId = parseInt(tmpLastId.lastId);
-            callback(this.lastId);
-        })
+    readLastMeta(callback){
+        if (fs.existsSync('./data/meta.json')){
+            fs.readFile('./data/meta.json', (err, file)=>{
+                if(err) throw err;
+                let tmpLastId = '';
+                tmpLastId = file;
+                tmpLastId = JSON.parse(tmpLastId);
+                this.lastId = parseInt(tmpLastId.lastId);
+                callback(this.lastId);
+            })
+        } 
+        else{
+            callback(0);
+        }
+    }
+
+    writeMeta(counter){
+        let json = JSON.stringify({ "lastId": counter });
+        fs.writeFileSync('./data/meta.json', json);
     }
 
     createFolder(path){
@@ -28,12 +39,15 @@ class Downloader {
         return this;
     }
 
-    writeData(json){
-
+    writeImageMeta(path, json){
+        json = JSON.stringify(json);
+        fs.writeFileSync(path+"/meta.json", json)
     }
 
-    downloadImage(url, fileName, callback){
-        fs.writeFileSync(fileName, download(url));
+    async downloadImage(url, fileName, callback){
+        console.log("download..." + fileName)
+        fs.writeFileSync(fileName, await download(url));
+        callback;
     }
 }
 
