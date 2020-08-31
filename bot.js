@@ -1,23 +1,15 @@
-const Crawler = require('./crawler');
-const Downloader = require('./downloader');
+const Wallpapersite = require("./sites/wallpapersite.com");
+const Save = require('./save');
 
-const cr = new Crawler("https://wallpapersite.com", "https://wallpapersite.com/random-wallpapers");
-const dl = new Downloader();
-cr.crawl(async json =>{
-    let counter = null;
-    dl.readLastMeta(lastId =>{
-        counter = parseInt(lastId);
-    })
+const wl = new Wallpapersite();
+const save = new Save();
+
+wl.crawl(json =>{
+    let path = './data/wallpapers/';
     let fileName = '';
-    let baseDir = './data/wallpapers/';
-    await json.data.forEach(e => {
-        cr.grapOriginalLink(e.link, link=>{
-            counter++;
-            fileName = link.match(/\/(?:.(?!\/))+$/gi).toString().replace("/", "");
-            dl.createFolder(baseDir+counter);
-            dl.writeImageMeta(baseDir+counter, e)
-            dl.downloadImage(link, baseDir+counter+"/"+fileName);
-            dl.writeMeta(counter);            
-        });
+    json.data.forEach(wallpaper => {        
+        fileName = wallpaper.imageLink.match(/\/(?:.(?!\/))+$/gi).toString().replace("/", "");
+        console.log('saving new wallpaper(' + wallpaper.id + ')')
+        save.save(path+wallpaper.id, fileName, wallpaper.imageLink, wallpaper);
     });
-})
+});
