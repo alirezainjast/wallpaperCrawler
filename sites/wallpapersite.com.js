@@ -45,7 +45,7 @@ class Wallpapersite {
                     tmpTags.push(e.children[0].data.replace(/\s/g, '').split(','));
                 })
                 
-                console.log('grabin original images link...')
+                console.log('grabing original images link...')
                 tmpLinks.forEach(e => {
                     axios.get(e)
                     .then(res =>{
@@ -67,7 +67,7 @@ class Wallpapersite {
                             console.log('setting json data...')
                             tmpId = id;
         
-                            for(let i = 0; i < tmpLinks.length; i++){
+                            for(let i = 0; i < 10; i++){
                                 tmpId++;
                                 this.json.data.push(
                                     {

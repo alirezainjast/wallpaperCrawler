@@ -4,7 +4,7 @@
   "description": "",
   "main": "bot.js",
   "scripts": {
-      "start": "node bot.js"
+    "start": "node bot.js"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,7 @@
   "dependencies": {
     "axios": "^0.20.0",
     "cheerio": "^1.0.0-rc.3",
-    "download": "^8.0.0"
+    "download": "^8.0.0",
+    "jimp": "^0.16.1"
   }
 }
