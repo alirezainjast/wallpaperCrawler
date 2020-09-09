@@ -9,6 +9,7 @@ class Save {
             json = JSON.stringify(json);
             fs.writeFileSync(path+"/meta.json", json);
             fs.writeFileSync(path+"/"+fileName, await download(link));
+            console.log(fileName + ' downloaded!')
             if(typeof callback == 'function') callback(path, fileName);
         });
     }

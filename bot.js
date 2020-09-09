@@ -1,21 +1,22 @@
 const Wallpapersite = require("./sites/wallpapersite.com");
 const Save = require('./save');
-const Cropper = require('./cropper');
+const Templator = require('./templator');
 
 const wl = new Wallpapersite();
 const save = new Save();
-const cr = new Cropper();
+const tp = new Templator();
 
 // downloading and saving images
 wl.crawl(json =>{
     let path = './data/wallpapers/';
     let fileName = '';
-    json.data.forEach(wallpaper => {        
+    json.data.forEach(wallpaper => {
+        // extract file name from link
         fileName = wallpaper.imageLink.match(/\/(?:.(?!\/))+$/gi).toString().replace("/", "");
-        console.log('start downloading... ' + wallpaper.id);
+        // downloading original image
         save.save(path+wallpaper.id, fileName, wallpaper.imageLink, wallpaper, (dir, file)=>{
-            cr.crop(dir, file);
-            console.log(file+ " saved!")
+            // resize, crop and templating image
+            tp.template(dir, file);
         });
     });
 });
