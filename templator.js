@@ -1,3 +1,4 @@
+// (read https://www.npmjs.com/package/jimp for info about image operations)
 const jimp = require('jimp');
 const fs = require('fs');
 

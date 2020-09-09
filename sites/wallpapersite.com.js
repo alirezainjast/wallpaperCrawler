@@ -1,3 +1,7 @@
+// this file will crawl https://wallpapersite.com/random-wallpapers
+// and the for each wallpaper that it's find will crawl each wallpaper page
+// and return a json with info program need...
+
 const axios = require('axios');
 const cheerio = require('cheerio');
 const fs = require('fs');
