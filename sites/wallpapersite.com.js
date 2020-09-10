@@ -19,9 +19,7 @@ class Wallpapersite {
     }
 
     readInitialId(callback){
-        console.log('we are here')
         jsn.read(this.metaPath, (json) =>{
-            console.log('this is json ' + json)
             this.initalId = parseInt(json.lastId)            
             if(typeof callback == 'function') callback(this.initalId);
         })
