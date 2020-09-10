@@ -57,7 +57,7 @@ class Templator {
                             .blit(overlay, 0, 0)
                             .write(dir+'/'+'(template)@internetwallpaper-'+file);
                             jsn.edit(dir+'/meta.json', 'templated', true);
-                            console.log(file + ' templated successfully!');
+                            console.log(dir + ' templated successfully!');
                         })
                     })
                 })

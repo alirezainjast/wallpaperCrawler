@@ -19,10 +19,12 @@ class Wallpapersite {
     }
 
     readInitialId(callback){
+        console.log('we are here')
         jsn.read(this.metaPath, (json) =>{
-            this.initalId = parseInt(json.lastId)
+            console.log('this is json ' + json)
+            this.initalId = parseInt(json.lastId)            
+            if(typeof callback == 'function') callback(this.initalId);
         })
-        if(typeof callback == 'function') callback(this.initalId);
     }
 
     crawl(callback){
@@ -45,22 +47,22 @@ class Wallpapersite {
                 })
                 
                 console.log('grabing original images link...')
-                tmpLinks.forEach(e => {
-                    axios.get(e)
+                for(let j = 0; j < 5; j++){
+                    axios.get(tmpLinks[j])
                     .then(res =>{
                         const body = res.data;
                         const $ = cheerio.load(body);
                         $('.res-ttl .original').each((i, e) =>{
-                            tmpImageLinks.push(this.actualUrl+e.attribs.href);
+                            tmpImageLinks[j] = (this.actualUrl+e.attribs.href);
                         })
                     })
                     .catch(err =>{
                         console.error(err);
                     })
-                });
+                }
 
                 const timer = setInterval(()=>{
-                    if(tmpImageLinks.length == 12){
+                    if(tmpImageLinks.length >= 5){
                         console.log('reading last global id(initalId)...');
                         this.readInitialId(id =>{
                             console.log('setting json data...')

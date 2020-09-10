@@ -9,9 +9,9 @@ class Save {
     save(path, fileName, link, json, callback){
         fs.mkdir(path, { recursive: true }, async (err) => {
             if (err) throw err;
+            console.log('working on=> ' + json.id)
             jsn.write(path+"/meta.json", json);
             fs.writeFileSync(path+"/"+fileName, await download(link));
-            console.log(fileName + ' downloaded!')
             if(typeof callback == 'function') callback(path, fileName);
         });
     }
