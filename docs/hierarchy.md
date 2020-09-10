@@ -36,11 +36,17 @@ contain images that we need for templating
 
 ## Files
 
+### - /sites/[SITE]
+will crawl the site and return an Array of [jsons](http://localhost:3000/#/hierarchy?id=sites)
+
 ### - bot.js
-will controll center of operations(modules will init from this file)
+this is the controll center of operations(most modules will init from this file)
 
 ### - save.js
-will saving images to `data/wallpapers/[ID_OF_WALLPAPER]` and changing content of local database(`data/meta.json`)
+will savie images to `data/wallpapers/[ID_OF_WALLPAPER]` and changing content of local database(`data/meta.json`)
 
 ### - templator.js
 will crop, resize, and template saved images using [jimp](https://www.npmjs.com/package/jimp)
+
+### - jsoner
+read, write and edit ```meta.json``` files

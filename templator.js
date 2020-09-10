@@ -1,6 +1,8 @@
 // (read https://www.npmjs.com/package/jimp for info about image operations)
 const jimp = require('jimp');
-const fs = require('fs');
+const Jsoner = require('./jsoner');
+
+const jsn = new Jsoner();
 
 class Templator {
     constructor(){
@@ -54,6 +56,7 @@ class Templator {
                             .blit(p, 163, 467)
                             .blit(overlay, 0, 0)
                             .write(dir+'/'+'(template)@internetwallpaper-'+file);
+                            jsn.edit(dir+'/meta.json', 'templated', true);
                             console.log(file + ' templated successfully!');
                         })
                     })

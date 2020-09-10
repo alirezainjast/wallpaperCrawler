@@ -5,6 +5,9 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 const fs = require('fs');
+const Jsoner = require('../jsoner');
+
+const jsn = new Jsoner();
 
 class Wallpapersite {
     constructor(){
@@ -16,22 +19,14 @@ class Wallpapersite {
     }
 
     readInitialId(callback){
-        const metaPath = this.metaPath;
-        if (fs.existsSync(metaPath)){
-            fs.readFile(metaPath, (err, file)=>{
-                if(err) throw err;
-                this.initalId = parseInt(JSON.parse(file).lastId);
-                if(typeof callback == 'function') callback(this.initalId);
-            })
-        } 
-        else{
-            this.initalId = null;
-            console.log("ther is no " + metaPath);
-        }
+        jsn.read(this.metaPath, (json) =>{
+            this.initalId = parseInt(json.lastId)
+        })
+        if(typeof callback == 'function') callback(this.initalId);
     }
 
     crawl(callback){
-
+        
         console.log("start crawling " + this.baseUrl + "...")
         axios.get(this.baseUrl)
             .then(res =>{
@@ -71,7 +66,7 @@ class Wallpapersite {
                             console.log('setting json data...')
                             tmpId = id;
         
-                            for(let i = 0; i < 10; i++){
+                            for(let i = 0; i < 5; i++){
                                 tmpId++;
                                 this.json.data.push(
                                     {
@@ -85,8 +80,7 @@ class Wallpapersite {
                             }             
         
                             console.log('writing last global id(initalId)...');
-                            this.initalId = JSON.stringify({ "lastId": tmpId });
-                            fs.writeFileSync(this.metaPath, this.initalId);
+                            jsn.edit(this.metaPath, 'lastId', tmpId)
                             console.log('crawling finished!');
                             if(typeof callback == 'function') callback(this.json);
                             clearInterval(timer);
