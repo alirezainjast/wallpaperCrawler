@@ -71,7 +71,7 @@ class Wallpapersite {
                                 this.json.data.push(
                                     {
                                         link: tmpLinks[i],
-                                        tag: tmpTags[i],
+                                        tags: tmpTags[i],
                                         templated: false,
                                         id: tmpId,
                                         imageLink: tmpImageLinks[i],

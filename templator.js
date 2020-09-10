@@ -16,7 +16,7 @@ class Templator {
             .then(image => {
                 image
                 .cover(1440,2560)
-                .write(dir+'/'+'(mobile)@internetwallpaper-'+file);
+                .write(dir+'/'+'(mobile)@internetWallpapers-'+file);
             })
             .catch(err =>{
                 console.error(err);
@@ -25,10 +25,10 @@ class Templator {
             .then(image => {
                 image
                 .cover(2560,1440)
-                .write(dir+'/'+'(pc)@internetwallpaper-'+file);
+                .write(dir+'/'+'(pc)@internetWallpapers-'+file);
                 this.template2(
-                    dir+'/'+'(mobile)@internetwallpaper-'+file,
-                    dir+'/'+'(pc)@internetwallpaper-'+file,
+                    dir+'/'+'(mobile)@internetWallpapers-'+file,
+                    dir+'/'+'(pc)@internetWallpapers-'+file,
                     dir,
                     file,
                 )
@@ -55,9 +55,9 @@ class Templator {
                             .blit(m, 1024, 437)
                             .blit(p, 163, 467)
                             .blit(overlay, 0, 0)
-                            .write(dir+'/'+'(template)@internetwallpaper-'+file);
+                            .write(dir+'/'+'(template)@internetWallpapers-'+file);
                             jsn.edit(dir+'/meta.json', 'templated', true);
-                            console.log(dir + ' templated successfully!');
+                            console.log(file + ' templated successfully!');
                         })
                     })
                 })

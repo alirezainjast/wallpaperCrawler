@@ -24,11 +24,9 @@ class Crawler {
         
                     // resize, crop and templating image
                     tp.template(dir, file);
-        
                 });
             });
-        });
-        
+        });        
     }
 }
 
