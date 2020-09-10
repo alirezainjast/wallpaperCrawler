@@ -43,7 +43,7 @@ global data that helps app do things in order(like last id, last wallpaper that 
 contain data about wallpaper
 
 ### - /sites/[SITE]
-will crawl the site and return an Array of [jsons](https://alirezainjast.github.io/wallpaperCrawler/#/hierarchy?id=sites)
+will crawl the site and return an Array of [jsons](/#/hierarchy?id=sites)
 
 ### - app.js
 controll center of all operations
