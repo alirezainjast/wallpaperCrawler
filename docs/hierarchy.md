@@ -36,18 +36,29 @@ contain images that we need for templating
 
 ## Files
 
+### - /data/meta.json
+global data that helps app do things in order(like last id, last wallpaper that was posted and etc...)
+
+### - /data/wallpapers/[ID]/meta.json
+contain data about wallpaper
+
 ### - /sites/[SITE]
 will crawl the site and return an Array of [jsons](https://alirezainjast.github.io/wallpaperCrawler/#/hierarchy?id=sites)
 
-### - bot.js
-this is the controll center of operations(most modules will init from this file)
+### - app.js
+controll center of all operations
 
-### - jsoner
+### - crawler.js
+controll center of crawling operations
+
+### - bot.js
+controll center of [telegram bot](https://github.com/yagop/node-telegram-bot-api) operations
+
+### - jsoner.js
 read, write and edit ```meta.json``` files
 
 ### - save.js
-will savie images to `data/wallpapers/[ID_OF_WALLPAPER]` and changing content of local database(`data/meta.json`)
+downloading images and writing meta.json(for each wallpaper)
 
 ### - templator.js
-will crop, resize, and template saved images using [jimp](https://www.npmjs.com/package/jimp)
-
+crop, resize, and template saved images using [jimp](https://www.npmjs.com/package/jimp)
