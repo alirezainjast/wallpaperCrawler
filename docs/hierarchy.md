@@ -37,7 +37,7 @@ contain images that we need for templating
 ## Files
 
 ### - /sites/[SITE]
-will crawl the site and return an Array of [jsons](https://alirezainjast.github.io/wallpaperCrawler/#/hierarchy?id=sites)
+will crawl the site and return an Array of [jsons](/#/hierarchy?id=sites)
 
 ### - bot.js
 this is the controll center of operations(most modules will init from this file)
