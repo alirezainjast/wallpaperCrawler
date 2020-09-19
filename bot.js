@@ -3,8 +3,10 @@ const Jsoner = require('./jsoner');
 const fs = require('fs');
 
 require('dotenv').config()
+const token = process.env.BOT_TOKEN;
 
 const jsn = new Jsoner();
+const bot = new TelegramBot(token, {polling: true});
 
 class Bot {
     constructor(){
@@ -34,9 +36,7 @@ class Bot {
             jsn.edit(this.metaPath, "lastUpload", id);
 
 
-            const token = process.env.BOT_TOKEN;
             const channelId = process.env.CHANNEL_ID;
-            const bot = new TelegramBot(token, {polling: true});
             const path = this.wallpapersPath+'/'+id;
 
             this.isTemplated(path+'/'+'meta.json', (templated) =>{
